@@ -14,6 +14,6 @@ struct Obstacle
 };
 
 void initObstacle(Obstacle& obstacle);
-void updateObstacle(Obstacle& obstacle);
+void updateObstacle(Obstacle& obstacle, float screenWidth, float screenHeight);
 void drawObstacle(Obstacle obstacle);
 }

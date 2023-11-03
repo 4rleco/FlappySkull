@@ -20,7 +20,7 @@ int main()
     while (!WindowShouldClose())
     {
         updateBird(bird);
-        updateObstacle(obstacle);
+        updateObstacle(obstacle, width, height);
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
