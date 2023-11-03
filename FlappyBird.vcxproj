@@ -21,9 +21,11 @@
   <ItemGroup>
     <ClCompile Include="src\Bird\bird.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Obstacle\obstacle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Bird\bird.h" />
+    <ClInclude Include="src\Obstacle\obstacle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

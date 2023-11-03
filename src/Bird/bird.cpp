@@ -31,6 +31,6 @@ void updateBird(Bird& bird)
 
 void drawBird(Bird bird)
 {
-    DrawCircleV(bird.pos, bird.radius, MAROON);
+    DrawCircleV(bird.pos, bird.radius, bird.color);
 }
 }
