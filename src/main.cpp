@@ -1,22 +1,29 @@
 #include "raylib.h"
 
+#include "bird/bird.h"
+
+using namespace game;
+
 int main()
 {
-    InitWindow(640, 480, "Flappy Bird");
+    const int width = 640;
+    const int height = 480;
 
-    int posX = 320;
-    int posY = 225;
-    float radius = 90;
+    InitWindow(width, height, "Flappy Bird");
+    Bird bird;
+
+    initBird(bird);
 
     while (!WindowShouldClose())
     {
-        BeginDrawing();
-        ClearBackground(WHITE);
+        updateBird(bird);
 
-        DrawCircle(posX, posY, radius, BLUE);
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        drawBird(bird);
 
         EndDrawing();
     }
-
     CloseWindow();
 }
