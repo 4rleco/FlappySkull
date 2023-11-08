@@ -11,6 +11,8 @@ int main()
 {
     const int width = 640;
     const int height = 480;
+    const int fontSize = 30;
+    Color fontColor = RED;
 
     InitWindow(width, height, "Flappy Bird");
     Bird bird;
@@ -33,6 +35,8 @@ int main()
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
+        DrawText("v 0.1 ", width - MeasureText("v 0.1 ", fontSize), 
+                 height - static_cast<int>(MeasureTextEx(GetFontDefault(), "v 0.1 ", fontSize, 0).y), fontSize, fontColor);
         drawBird(bird);
         drawObstacle(obstacle);
 
