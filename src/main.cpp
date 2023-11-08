@@ -1,7 +1,5 @@
 #include "raylib.h"
 
-#include <iostream>
-
 #include "bird/bird.h"
 #include "Obstacle/obstacle.h"
 
@@ -23,7 +21,7 @@ int main()
 
     while (!WindowShouldClose())
     {
-        updateBird(bird);
+        updateBird(bird, height);
         updateObstacle(obstacle, width, height);
 
         if (CheckCollisionCircleRec(bird.center, bird.radius, obstacle.rect))

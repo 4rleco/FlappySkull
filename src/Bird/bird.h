@@ -14,7 +14,7 @@ struct Bird
 };
 
 void initBird(Bird& bird);
-void updateBird(Bird& bird);
+void updateBird(Bird& bird, int screenHeight);
 void drawBird(Bird bird);
 void restartBird(Bird& bird);
 }
