@@ -7,6 +7,7 @@ namespace game
 struct Bird
 {
     Vector2 pos;
+    Vector2 center;
     float speed;
     float radius;
     Color color;
@@ -15,4 +16,5 @@ struct Bird
 void initBird(Bird& bird);
 void updateBird(Bird& bird);
 void drawBird(Bird bird);
+void restartBird(Bird& bird);
 }

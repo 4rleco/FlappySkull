@@ -8,8 +8,10 @@ void moveBirdDown(Bird& bird);
 void initBird(Bird& bird)
 {
     bird.pos = { 120, 240 };
-    bird.speed = 20.0f;
+    bird.speed = 45.0f;
     bird.radius = 50;
+    bird.center.x = bird.pos.x + bird.radius * 2;
+    bird.center.y = bird.pos.y + bird.radius * 2;
     bird.color = YELLOW;
 }
 
@@ -27,10 +29,17 @@ void updateBird(Bird& bird)
 {
     moveBirdUp(bird);
     moveBirdDown(bird);
+    bird.center.x = bird.pos.x + bird.radius * 2;
+    bird.center.y = bird.pos.y + bird.radius * 2;
 }
 
 void drawBird(Bird bird)
 {
-    DrawCircleV(bird.pos, bird.radius, bird.color);
+    DrawCircleV(bird.center, bird.radius, bird.color);
+}
+
+void restartBird(Bird& bird)
+{
+    bird.pos = { 120, 240 };
 }
 }

@@ -1,5 +1,7 @@
 #include "raylib.h"
 
+#include <iostream>
+
 #include "bird/bird.h"
 #include "Obstacle/obstacle.h"
 
@@ -21,6 +23,12 @@ int main()
     {
         updateBird(bird);
         updateObstacle(obstacle, width, height);
+
+        if (CheckCollisionCircleRec(bird.center, bird.radius, obstacle.rect))
+        {
+            restartBird(bird);
+            restartObstacle(obstacle, width, height);
+        }
 
         BeginDrawing();
         ClearBackground(RAYWHITE);

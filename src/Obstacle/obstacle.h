@@ -6,9 +6,7 @@ namespace game
 {
 struct Obstacle
 {
-	int width;
-	int height;
-	Rectangle pos;
+	Rectangle rect;
 	float speed;
 	Color color;
 };
@@ -16,4 +14,5 @@ struct Obstacle
 void initObstacle(Obstacle& obstacle);
 void updateObstacle(Obstacle& obstacle, float screenWidth, float screenHeight);
 void drawObstacle(Obstacle obstacle);
+void restartObstacle(Obstacle& obstacle, float screenWidth, float screenHeight);
 }
