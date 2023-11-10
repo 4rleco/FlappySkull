@@ -27,7 +27,8 @@ int main()
         updateBird(bird, height);
         updateObstacle(obstacle, width, height);
 
-        if (CheckCollisionCircleRec(bird.center, bird.radius, obstacle.rect))
+        if (CheckCollisionCircleRec(bird.center, bird.radius, obstacle.rect) || 
+            checkBirdTouchGround(bird, height))
         {
             restartParallax();
             restartBird(bird);

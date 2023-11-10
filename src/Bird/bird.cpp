@@ -6,7 +6,7 @@ namespace game
 {
 void moveBirdUp(Bird& bird);
 //void moveBirdDown(Bird& bird);
-void checkBirdScreenLimits(Bird& bird, int screenHeight);
+void checkBirdHeightLimit(Bird& bird, int screenHeight);
 
 void initBird(Bird& bird)
 {
@@ -21,7 +21,7 @@ void initBird(Bird& bird)
 void updateBird(Bird& bird, int screenHeight)
 {
     moveBirdUp(bird);
-    checkBirdScreenLimits(bird, screenHeight);
+    checkBirdHeightLimit(bird, screenHeight);
 
     bird.velocity += bird.gravity * GetFrameTime();
     bird.pos.y += bird.velocity * GetFrameTime();
@@ -50,13 +50,13 @@ void moveBirdUp(Bird& bird)
 //    if (IsKeyPressed(KEY_DOWN)) bird.pos.y += bird.jumpForce * GetFrameTime();
 //}
 
-void checkBirdScreenLimits(Bird& bird, int screenHeight)
+void checkBirdHeightLimit(Bird& bird, int screenHeight)
 {
     if (bird.pos.y < 0) bird.pos.y = 0;
+}
 
-    if (bird.pos.y + bird.radius * 2 > screenHeight)
-    {
-        bird.pos.y = static_cast<float>(screenHeight) - bird.radius * 2;
-    }
+bool checkBirdTouchGround(Bird& bird, int screenHeight)
+{
+    return (bird.center.y > screenHeight);
 }
 }
