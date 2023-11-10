@@ -1,26 +1,33 @@
 #include "bird.h"
 
+#include <iostream>
+
 namespace game
 {
 void moveBirdUp(Bird& bird);
-void moveBirdDown(Bird& bird);
+//void moveBirdDown(Bird& bird);
 void checkBirdScreenLimits(Bird& bird, int screenHeight);
 
 void initBird(Bird& bird)
 {
     bird.pos = { 120, 240 };
-    bird.speed = 65.0f;
-    bird.radius = 50;
+    bird.jumpForce = 250.f;
+    bird.radius = 40.f;
+    bird.gravity = 600.f;
+    bird.velocity = 0.f;
     bird.color = YELLOW;
 }
 
 void updateBird(Bird& bird, int screenHeight)
 {
+    moveBirdUp(bird);
+    checkBirdScreenLimits(bird, screenHeight);
+
+    bird.velocity += bird.gravity * GetFrameTime();
+    bird.pos.y += bird.velocity * GetFrameTime();
+
     bird.center.x = bird.pos.x + bird.radius;
     bird.center.y = bird.pos.y + bird.radius;
-    moveBirdUp(bird);
-    moveBirdDown(bird);
-    checkBirdScreenLimits(bird, screenHeight);
 }
 
 void drawBird(Bird bird)
@@ -35,13 +42,13 @@ void restartBird(Bird& bird)
 
 void moveBirdUp(Bird& bird)
 {
-    if (IsKeyDown(KEY_UP)) bird.pos.y -= bird.speed * GetFrameTime();
+    if (IsKeyPressed(KEY_UP)) bird.velocity = -bird.jumpForce;
 }
 
-void moveBirdDown(Bird& bird)
-{
-    if (IsKeyDown(KEY_DOWN)) bird.pos.y += bird.speed * GetFrameTime();
-}
+//void moveBirdDown(Bird& bird)
+//{
+//    if (IsKeyPressed(KEY_DOWN)) bird.pos.y += bird.jumpForce * GetFrameTime();
+//}
 
 void checkBirdScreenLimits(Bird& bird, int screenHeight)
 {

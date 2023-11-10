@@ -8,8 +8,10 @@ struct Bird
 {
     Vector2 pos;
     Vector2 center;
-    float speed;
+    float jumpForce;
     float radius;
+    float gravity;
+    float velocity;
     Color color;
 };
 
