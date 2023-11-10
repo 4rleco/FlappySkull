@@ -9,7 +9,7 @@ void checkBirdScreenLimits(Bird& bird, int screenHeight);
 void initBird(Bird& bird)
 {
     bird.pos = { 120, 240 };
-    bird.speed = 45.0f;
+    bird.speed = 65.0f;
     bird.radius = 50;
     bird.color = YELLOW;
 }

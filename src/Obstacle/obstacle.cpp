@@ -32,6 +32,12 @@ void drawObstacle(Obstacle obstacle)
 	DrawRectangle(static_cast<int>(obstacle.rect.x), static_cast<int>(obstacle.rect.y), static_cast<int>(obstacle.rect.width), static_cast<int>(obstacle.rect.height), obstacle.color);
 }
 
+void restartObstacle(Obstacle& obstacle, float screenWidth, float screenHeight)
+{
+	obstacle.rect.x = screenWidth;
+	obstacle.rect.y = static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight) - static_cast<int>(obstacle.rect.height)));
+}
+
 void checkObstacleLimits(Obstacle& obstacle, float screenWidth, float screenHeight)
 {
 	if (obstacle.rect.x < 0)
@@ -39,11 +45,5 @@ void checkObstacleLimits(Obstacle& obstacle, float screenWidth, float screenHeig
 		obstacle.rect.x = screenWidth;
 		obstacle.rect.y =  static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight) - static_cast<int>(obstacle.rect.height)));
 	}
-}
-
-void restartObstacle(Obstacle& obstacle, float screenWidth, float screenHeight)
-{
-	obstacle.rect.x = screenWidth;
-	obstacle.rect.y = static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight) - static_cast<int>(obstacle.rect.height)));
 }
 }
