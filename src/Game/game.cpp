@@ -10,12 +10,13 @@
 
 namespace game
 {
-extern MenuButtons menuButton;
+extern CurrentScreen currentScreen;
 static Bird bird;
 static Obstacle obstacle;
 static Button playButton;
 static Button creditsButton;
 static Button exitButton;
+Button backButton;
 
 static const int width = 1024;
 static const int height = 768;
@@ -31,11 +32,11 @@ void gameLoop()
 {
 	initGame();
 
-	initButtons(playButton, creditsButton, exitButton);
+	initButtons(playButton, creditsButton, exitButton, backButton);
 
 	while (!WindowShouldClose())
 	{
-		switch (menuButton)
+		switch (currentScreen)
 		{
 		case MENU:
 			updateMenu(playButton, creditsButton, exitButton);
@@ -71,6 +72,7 @@ void initGame()
 void updateGame()
 {
 	updateParallax();
+	updateBackButton(backButton);
 	updateBird(bird);
 	updateObstacle(obstacle, width, height);
 
@@ -89,6 +91,7 @@ void drawGame()
 	ClearBackground(RAYWHITE);
 
 	drawParallax();
+	drawBackButton(backButton);
 	DrawText("v 0.1 ", width - MeasureText("v 0.1 ", fontSize),
 		height - static_cast<int>(MeasureTextEx(GetFontDefault(), "v 0.1 ", fontSize, 0).y), fontSize, fontColor);
 	drawBird(bird);
