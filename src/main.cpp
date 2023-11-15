@@ -46,6 +46,7 @@ int main()
 
         EndDrawing();
     }
+    deinitBird(bird);
     deinitParallax();
     CloseWindow();
 }
