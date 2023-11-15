@@ -5,11 +5,16 @@
 #include "Parallax/parallax.h"
 #include "Bird/bird.h"
 #include "Obstacle/obstacle.h"
+#include "Menu/menu.h"
 
 namespace game
 {
+extern MenuButtons menuButton;
 static Bird bird;
 static Obstacle obstacle;
+static Button playButton;
+static Button creditsButton;
+static Button exitButton;
 
 static const int width = 1024;
 static const int height = 768;
@@ -25,10 +30,28 @@ void gameLoop()
 {
 	initGame();
 
+	initButtons(playButton, creditsButton, exitButton);
+
 	while (!WindowShouldClose())
 	{
-		updateGame();
-		drawGame();
+		switch (menuButton)
+		{
+		case MENU:
+			updateMenu(playButton, creditsButton, exitButton);
+			drawButtons(playButton, creditsButton, exitButton);
+			break;
+		case PLAY:
+			updateGame();
+			drawGame();
+			break;
+		case CREDITS:
+			break;
+		case EXIT:
+			return;
+			break;
+		default:
+			break;
+		}		
 	}
 
 	deinitGame();
