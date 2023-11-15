@@ -24,7 +24,7 @@ int main()
     while (!WindowShouldClose())
     {
         updateParallax();
-        updateBird(bird, height);
+        updateBird(bird);
         updateObstacle(obstacle, width, height);
 
         if (CheckCollisionCircleRec(bird.center, bird.radius, obstacle.rect) || 
