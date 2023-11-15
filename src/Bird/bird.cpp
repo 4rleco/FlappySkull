@@ -8,8 +8,8 @@ static Animation birdAnimation;
 static int totalSprites = 2;
 
 void moveBirdUp(Bird& bird);
-//void moveBirdDown(Bird& bird);
 void checkBirdHeightLimit(Bird& bird);
+void updateBirdPos(Bird& bird);
 
 void initBird(Bird& bird)
 {
@@ -30,13 +30,9 @@ void updateBird(Bird& bird)
     moveBirdUp(bird);
     checkBirdHeightLimit(bird);
 
-    bird.velocity += bird.gravity * GetFrameTime();
-    bird.pos.y += bird.velocity * GetFrameTime();
-
-    bird.center.x = bird.pos.x + bird.radius;
-    bird.center.y = bird.pos.y + bird.radius;
-
+    updateBirdPos(bird);
     bird.flying = false;
+
     updateAnimation(birdAnimation, static_cast<float>(bird.texture.width));
 }
 
@@ -68,14 +64,18 @@ void moveBirdUp(Bird& bird)
     }
 }
 
-//void moveBirdDown(Bird& bird)
-//{
-//    if (IsKeyPressed(KEY_DOWN)) bird.pos.y += bird.jumpForce * GetFrameTime();
-//}
-
 void checkBirdHeightLimit(Bird& bird)
 {
     if (bird.pos.y < 0) bird.pos.y = 0;
+}
+
+void updateBirdPos(Bird& bird)
+{
+    bird.velocity += bird.gravity * GetFrameTime();
+    bird.pos.y += bird.velocity * GetFrameTime();
+
+    bird.center.x = bird.pos.x + bird.radius;
+    bird.center.y = bird.pos.y + bird.radius;
 }
 
 bool checkBirdTouchGround(Bird& bird, int screenHeight)
