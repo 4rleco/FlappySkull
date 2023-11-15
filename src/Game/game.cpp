@@ -6,6 +6,7 @@
 #include "Bird/bird.h"
 #include "Obstacle/obstacle.h"
 #include "Menu/menu.h"
+#include "Menu/credits.h"
 
 namespace game
 {
@@ -45,6 +46,7 @@ void gameLoop()
 			drawGame();
 			break;
 		case CREDITS:
+			printCredits();
 			break;
 		case EXIT:
 			return;

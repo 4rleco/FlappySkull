@@ -23,6 +23,7 @@
     <ClCompile Include="src\Bird\bird.cpp" />
     <ClCompile Include="src\Game\game.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Menu\credits.cpp" />
     <ClCompile Include="src\Menu\menu.cpp" />
     <ClCompile Include="src\Obstacle\obstacle.cpp" />
     <ClCompile Include="src\Parallax\parallax.cpp" />
@@ -31,6 +32,7 @@
     <ClInclude Include="src\Animation\animation.h" />
     <ClInclude Include="src\Bird\bird.h" />
     <ClInclude Include="src\Game\game.h" />
+    <ClInclude Include="src\Menu\credits.h" />
     <ClInclude Include="src\Menu\menu.h" />
     <ClInclude Include="src\Obstacle\obstacle.h" />
     <ClInclude Include="src\Parallax\parallax.h" />
