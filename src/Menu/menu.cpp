@@ -3,7 +3,10 @@
 namespace game
 {
 CurrentScreen currentScreen = MENU;
+static const int fontSize = 30;
+static Color fontColor = RED;
 
+void printVersion();
 void drawButton(Button button);
 bool isMouseOverButton(Button button);
 bool isButtonClicked(Button& button);
@@ -26,6 +29,8 @@ void drawButtons(Button playButton, Button creditsButton, Button exitButton)
     drawButton(creditsButton);
     drawButton(exitButton);
 
+    printVersion();
+
     EndDrawing();
 }
 
@@ -44,6 +49,12 @@ void updateMenu(Button& playButton, Button& creditsButton, Button& exitButton)
 void updateBackButton(Button backButton)
 {
     if (isButtonClicked(backButton) && currentScreen != MENU) currentScreen = MENU;
+}
+
+void printVersion()
+{
+    DrawText("v 0.2 ", width -MeasureText("v 0.2 ", fontSize),
+    height - static_cast<int>(MeasureTextEx(GetFontDefault(), "v 0.2 ", fontSize, 0).y), fontSize, fontColor);
 }
 
 void drawButton(Button button) 

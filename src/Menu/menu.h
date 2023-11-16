@@ -8,6 +8,8 @@
 namespace game
 {
 enum CurrentScreen { MENU, PLAY, PAUSE, CREDITS, EXIT };
+extern const int width;
+extern const int height;
 
 struct Button 
 {

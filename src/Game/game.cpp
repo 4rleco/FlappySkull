@@ -18,10 +18,8 @@ static Button creditsButton;
 static Button exitButton;
 Button backButton;
 
-static const int width = 1024;
-static const int height = 768;
-static const int fontSize = 30;
-static Color fontColor = RED;
+const int width = 1024;
+const int height = 768;
 
 void initGame();
 void updateGame();
@@ -92,8 +90,7 @@ void drawGame()
 
 	drawParallax();
 	drawBackButton(backButton);
-	DrawText("v 0.1 ", width - MeasureText("v 0.1 ", fontSize),
-		height - static_cast<int>(MeasureTextEx(GetFontDefault(), "v 0.1 ", fontSize, 0).y), fontSize, fontColor);
+	
 	drawBird(bird);
 	drawObstacle(obstacle);
 
