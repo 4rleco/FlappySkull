@@ -13,6 +13,7 @@ namespace game
 extern CurrentScreen currentScreen;
 static Bird bird;
 static Obstacle obstacle;
+static Obstacle topObstacle;
 static Button playButton;
 static Button creditsButton;
 static Button exitButton;
@@ -64,7 +65,8 @@ void initGame()
 
 	initParallax();
 	initBird(bird);
-	initObstacle(obstacle);
+	initObstacle(obstacle, false);
+	initObstacle(topObstacle, true);
 }
 
 void updateGame()
@@ -72,14 +74,16 @@ void updateGame()
 	updateParallax();
 	updateBackButton(backButton);
 	updateBird(bird);
-	updateObstacle(obstacle, width, height);
+	updateObstacle(obstacle, false);
+	updateObstacle(topObstacle, true);
 
 	if (CheckCollisionCircleRec(bird.center, bird.radius, obstacle.rect) ||
 		checkBirdTouchGround(bird, height))
 	{
 		restartParallax();
 		restartBird(bird);
-		restartObstacle(obstacle, width, height);
+		restartObstacle(obstacle, false);
+		restartObstacle(topObstacle, true);
 	}
 }
 
@@ -93,6 +97,7 @@ void drawGame()
 	
 	drawBird(bird);
 	drawObstacle(obstacle);
+	drawObstacle(topObstacle);
 
 	EndDrawing();
 }

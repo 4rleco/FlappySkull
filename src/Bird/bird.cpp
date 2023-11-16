@@ -6,6 +6,7 @@ namespace game
 {
 static Animation birdAnimation;
 static int totalSprites = 2;
+static int birdDiameter;
 
 void moveBirdUp(Bird& bird);
 void checkBirdHeightLimit(Bird& bird);
@@ -21,6 +22,7 @@ void initBird(Bird& bird)
     bird.velocity = 0.f;
     bird.flying = false;
     bird.color = WHITE;
+    birdDiameter = static_cast<int>(bird.radius * 2);
 
     initAnimation(birdAnimation, static_cast<float>(bird.texture.width), static_cast<float>(bird.texture.height), 2);
 }
@@ -81,6 +83,11 @@ void updateBirdPos(Bird& bird)
 bool checkBirdTouchGround(Bird& bird, int screenHeight)
 {
     return (bird.center.y > screenHeight);
+}
+
+int getBirdDiameter()
+{
+    return birdDiameter;
 }
 
 void deinitBird(Bird& bird)

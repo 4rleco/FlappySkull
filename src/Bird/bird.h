@@ -22,5 +22,6 @@ void updateBird(Bird& bird);
 void drawBird(Bird bird);
 void restartBird(Bird& bird);
 bool checkBirdTouchGround(Bird& bird, int screenHeight);
+int getBirdDiameter();
 void deinitBird(Bird& bird);
 }
