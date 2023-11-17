@@ -3,6 +3,7 @@
 #include "Bird/bird.h"
 
 #include <time.h>
+#include <iostream>
 
 namespace game
 {
@@ -25,7 +26,7 @@ namespace game
 			obstacle[i].speed = 85.0f;
 			obstacle[i].color = RED;
 
-			if (i % 2 == 0)  // the pair numbers from the array will be the upper pipes 
+			if (i % 2 == 0)
 			{
 				obstacle[i].rect.x = static_cast<float>(width) + i * obstacle[i].rect.width * spaceBetweenObstacles;
 				obstacle[i].rect.y = 0;
@@ -44,8 +45,8 @@ namespace game
 	{
 		for (int i = 0; i < maxObstacles; i++)
 		{
-			checkObstacleLimits(obstacle, maxObstacles);
 			obstacle[i].rect.x -= obstacle[i].speed * GetFrameTime();
+			checkObstacleLimits(obstacle, maxObstacles);
 		}
 	}
 
@@ -63,7 +64,7 @@ namespace game
 		//obstacle[i].rect.x = static_cast<float>(width);
 		/*	obstacle.rect.x = static_cast<float>(width) + i + 20*/;
 
-		if (obstacleNumber % 2 == 0)
+		if (obstacleNumber % 2 == 0) // the pair numbers from the array will be the upper pipes
 		{
 			obstacle.rect.x = static_cast<float>(width) + obstacleNumber * prevoiusObstacleWidth * spaceBetweenObstacles;
 			obstacle.rect.height = getRandomObstacleHeight();
@@ -81,9 +82,10 @@ namespace game
 	{
 		for (int i = 0; i < maxObstacles; i++)
 		{
-			if (obstacle[i].rect.x < 0)
+			if (obstacle[i].rect.x + obstacle[i].rect.width < 0)
 			{
 				restartObstacle(obstacle[i], i, static_cast<int>(obstacle[i - 1].rect.width), static_cast<int>(obstacle[i - 1].rect.height), static_cast<int>(obstacle[i - 1].rect.x));
+				std::cout << i << std::endl;
 			}
 		}
 	}

@@ -59,7 +59,7 @@ namespace game
 
 	void moveBirdUp(Bird& bird)
 	{
-		if (IsKeyPressed(KEY_UP))
+		if (IsKeyPressed(KEY_W))
 		{
 			bird.velocity = -bird.jumpForce;
 			bird.flying = true;

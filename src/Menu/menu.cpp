@@ -29,13 +29,13 @@ namespace game
 		exitButton = { {static_cast<float>(width) / 2 - offsetX,  static_cast<float>(height) / 2 + thirdButtonOffsetY,
 						buttonWidth, buttonHeight}, "Exit", false };
 
-		backButton = { { 10, 10, 40, 40 }, "<-", false };
+		backButton = { { 980, 720, 40, 40 }, "<-", false };
 	}
 
 	void drawButtons(Button playButton, Button creditsButton, Button exitButton)
 	{
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
+		ClearBackground(GRAY);
 
 		drawButton(playButton);
 		drawButton(creditsButton);

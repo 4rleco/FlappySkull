@@ -13,19 +13,21 @@ namespace game
 
 	void printCredits()
 	{
-		std::string creditsText = "Game developed by Daniela Gonzalez";
-		int creditsSize = 50;
+		std::string creditsText1 = "Game developed by Daniela Gonzalez";
+		std::string creditsText2 = "and Joaquin Herrero Lendner";
+		int creditsSize = 30;
 	
-		int creditsPosX = GetScreenWidth() / 2 - static_cast<int>((MeasureText(creditsText.c_str(), creditsSize))) / 2;
+		int creditsPosX = GetScreenWidth() / 2 - static_cast<int>((MeasureText(creditsText1.c_str(), creditsSize))) / 2;
 		int creditsPosY = GetScreenHeight() / 2;
 
 		updateBackButton(backButton);
 
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
+		ClearBackground(GRAY);
 
 		drawBackButton(backButton);
-		DrawText(creditsText.c_str(), static_cast<int>(creditsPosX), static_cast<int>(creditsPosY), creditsSize, ORANGE);
+		DrawText(creditsText1.c_str(), static_cast<int>(creditsPosX), static_cast<int>(creditsPosY), creditsSize, ORANGE);
+		DrawText(creditsText2.c_str(), static_cast<int>(creditsPosX) + 60, static_cast<int>(creditsPosY) + 60, creditsSize, ORANGE);
 		EndDrawing();
 	}
 }
