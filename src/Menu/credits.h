@@ -2,5 +2,5 @@
 
 namespace game
 {
-void printCredits();
+	void printCredits();
 }

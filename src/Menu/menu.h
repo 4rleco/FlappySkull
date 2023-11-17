@@ -7,20 +7,20 @@
 
 namespace game
 {
-enum CurrentScreen { MENU, PLAY, PAUSE, CREDITS, EXIT };
-extern const int width;
-extern const int height;
+	enum CurrentScreen { MENU, PLAY, PAUSE, CREDITS, EXIT };
+	extern const int width;
+	extern const int height;
 
-struct Button 
-{
-    Rectangle bounds;
-    std::string text;
-    bool clicked;
-};
+	struct Button
+	{
+		Rectangle bounds;
+		std::string text;
+		bool clicked;
+	};
 
-void initButtons(Button& playButton, Button& creditsButton, Button& exitButton, Button& backButton);
-void drawButtons(Button playButton, Button creditsButton, Button exitButton);
-void drawBackButton(Button backButton);
-void updateMenu(Button& playButton, Button& creditsButton, Button& exitButton);
-void updateBackButton(Button backButton);
+	void initButtons(Button& playButton, Button& creditsButton, Button& exitButton, Button& backButton);
+	void drawButtons(Button playButton, Button creditsButton, Button exitButton);
+	void drawBackButton(Button backButton);
+	void updateMenu(Button& playButton, Button& creditsButton, Button& exitButton);
+	void updateBackButton(Button backButton);
 }

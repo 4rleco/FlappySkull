@@ -2,5 +2,5 @@
 
 namespace game
 {
-void gameLoop();
+	void gameLoop();
 }

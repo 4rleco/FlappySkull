@@ -1,30 +1,31 @@
 #include "credits.h"
 
-#include <string>
+#include "menu.h"
 
 #include "raylib.h"
 
-#include "menu.h"
+#include <string>
+
 
 namespace game
 {
-extern Button backButton;
+	extern Button backButton;
 
-void printCredits()
-{
-std::string creditsText = "Game developed by Daniela Gonzalez";
-int creditsSize = 50;
-Vector2 creditsPos;
-creditsPos.x = GetScreenWidth() / 2 - static_cast<float>((MeasureText(creditsText.c_str(), creditsSize))) / 2;
-creditsPos.y = static_cast<float>(GetScreenHeight()) / 2;
+	void printCredits()
+	{
+		std::string creditsText = "Game developed by Daniela Gonzalez";
+		int creditsSize = 50;
+	
+		int creditsPosX = GetScreenWidth() / 2 - static_cast<int>((MeasureText(creditsText.c_str(), creditsSize))) / 2;
+		int creditsPosY = GetScreenHeight() / 2;
 
-updateBackButton(backButton);
+		updateBackButton(backButton);
 
-BeginDrawing();
-ClearBackground(RAYWHITE);
+		BeginDrawing();
+		ClearBackground(RAYWHITE);
 
-drawBackButton(backButton);
-DrawText(creditsText.c_str(), static_cast<int>(creditsPos.x), static_cast<int>(creditsPos.y), creditsSize, ORANGE);
-EndDrawing();
-}
+		drawBackButton(backButton);
+		DrawText(creditsText.c_str(), static_cast<int>(creditsPosX), static_cast<int>(creditsPosY), creditsSize, ORANGE);
+		EndDrawing();
+	}
 }
