@@ -14,5 +14,5 @@ struct Obstacle
 void initObstacle(Obstacle obstacle[], const int maxObstacles);
 void updateObstacle(Obstacle obstacle[], const int maxObstacles);
 void drawObstacle(Obstacle obstacle[], const int maxObstacles);
-void restartObstacles(Obstacle obstacle[], const int maxObstacles);
+//void restartObstacles(Obstacle obstacle[], const int maxObstacles);
 }

@@ -11,7 +11,7 @@
 namespace game
 {
 extern CurrentScreen currentScreen;
-const int maxObstacles = 2;
+const int maxObstacles = 6;
 static Bird bird;
 static Obstacle obstacle[maxObstacles];
 static Button playButton;
@@ -82,7 +82,7 @@ void updateGame()
 		{
 			restartParallax();
 			restartBird(bird);
-			restartObstacles(obstacle, maxObstacles);
+			initObstacle(obstacle, maxObstacles);
 		}
 	}
 }
