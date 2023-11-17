@@ -11,8 +11,8 @@ struct Obstacle
 	Color color;
 };
 
-void initObstacle(Obstacle& obstacle, bool isTop);
-void updateObstacle(Obstacle& obstacle, bool isTop);
-void drawObstacle(Obstacle obstacle);
-void restartObstacle(Obstacle& obstacle, bool isTop);
+void initObstacle(Obstacle obstacle[], const int maxObstacles);
+void updateObstacle(Obstacle obstacle[], const int maxObstacles);
+void drawObstacle(Obstacle obstacle[], const int maxObstacles);
+void restartObstacles(Obstacle obstacle[], const int maxObstacles);
 }

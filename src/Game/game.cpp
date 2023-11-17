@@ -11,9 +11,9 @@
 namespace game
 {
 extern CurrentScreen currentScreen;
+const int maxObstacles = 2;
 static Bird bird;
-static Obstacle obstacle;
-static Obstacle topObstacle;
+static Obstacle obstacle[maxObstacles];
 static Button playButton;
 static Button creditsButton;
 static Button exitButton;
@@ -65,8 +65,7 @@ void initGame()
 
 	initParallax();
 	initBird(bird);
-	initObstacle(obstacle, false);
-	initObstacle(topObstacle, true);
+	initObstacle(obstacle, maxObstacles);
 }
 
 void updateGame()
@@ -74,16 +73,17 @@ void updateGame()
 	updateParallax();
 	updateBackButton(backButton);
 	updateBird(bird);
-	updateObstacle(obstacle, false);
-	updateObstacle(topObstacle, true);
+	updateObstacle(obstacle, maxObstacles);
 
-	if (CheckCollisionCircleRec(bird.center, bird.radius, obstacle.rect) ||
-		checkBirdTouchGround(bird, height))
+	for (int i = 0; i < maxObstacles; i++)
 	{
-		restartParallax();
-		restartBird(bird);
-		restartObstacle(obstacle, false);
-		restartObstacle(topObstacle, true);
+		if (CheckCollisionCircleRec(bird.center, bird.radius, obstacle[i].rect) ||
+			checkBirdTouchGround(bird, height))
+		{
+			restartParallax();
+			restartBird(bird);
+			restartObstacles(obstacle, maxObstacles);
+		}
 	}
 }
 
@@ -93,11 +93,11 @@ void drawGame()
 	ClearBackground(RAYWHITE);
 
 	drawParallax();
-	drawBackButton(backButton);
 	
 	drawBird(bird);
-	drawObstacle(obstacle);
-	drawObstacle(topObstacle);
+	drawObstacle(obstacle, maxObstacles);
+
+	drawBackButton(backButton);
 
 	EndDrawing();
 }

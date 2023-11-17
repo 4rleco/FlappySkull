@@ -8,76 +8,83 @@ namespace game
 {
 extern const int width;
 extern const int height;
+static int space = 90;
 
-void checkObstacleLimits(Obstacle& obstacle, bool isTop); 
-float getRandomObstacleHeight(bool isTop);
+void checkObstacleLimits(Obstacle obstacle[], const int maxObstacles);
+float getRandomObstacleHeight();
 
-void initObstacle(Obstacle& obstacle, bool isTop)
+void initObstacle(Obstacle obstacle[], const int maxObstacles)
 {
 	SetRandomSeed(static_cast<unsigned int>(time(NULL)));
 
-	obstacle.rect.width = 50;
-	obstacle.speed = 85.0f;
-	obstacle.color = RED;
-	obstacle.rect.x = static_cast<float>(width);
-
-	if (isTop)
+	for (int i = 0; i < maxObstacles; i++)
 	{
-		obstacle.rect.height = getRandomObstacleHeight(true);
-		obstacle.rect.y = height - obstacle.rect.height / 2;
-	}
-	else
-	{
-		obstacle.rect.height = getRandomObstacleHeight(false);
-		obstacle.rect.y = 0;
-	}
-}
+		obstacle[i].rect.width = 50;
+		obstacle[i].speed = 85.0f;
+		obstacle[i].color = RED;
+		obstacle[i].rect.x = static_cast<float>(width);
 
-void updateObstacle(Obstacle& obstacle, bool isTop)
-{
-	checkObstacleLimits(obstacle, isTop);
-	obstacle.rect.x -= obstacle.speed * GetFrameTime();
-}
-
-void drawObstacle(Obstacle obstacle)
-{
-	DrawRectangle(static_cast<int>(obstacle.rect.x), static_cast<int>(obstacle.rect.y), static_cast<int>(obstacle.rect.width), static_cast<int>(obstacle.rect.height), obstacle.color);
-}
-
-void restartObstacle(Obstacle& obstacle, bool isTop)
-{
-	obstacle.rect.x = static_cast<float>(width);
-
-	if (isTop)
-	{
-		obstacle.rect.height = getRandomObstacleHeight(true);
-		obstacle.rect.y = height - obstacle.rect.height / 2;
-	}
-	else
-	{
-		obstacle.rect.height = getRandomObstacleHeight(false);
-		obstacle.rect.y = 0;
-	}
-
-}
-
-void checkObstacleLimits(Obstacle& obstacle, bool isTop)
-{
-	if (obstacle.rect.x < 0)
-	{
-		restartObstacle(obstacle, isTop);
+		if (i % 2 == 0)  // the pair numbers from the array will be the upper pipes 
+		{
+			obstacle[i].rect.y = 0;
+			obstacle[i].rect.height = getRandomObstacleHeight();
+		}
+		else
+		{
+			obstacle[i].rect.y = obstacle[i - 1].rect.height + getBirdDiameter() + space;
+			obstacle[i].rect.height = height;
+		}
 	}
 }
 
-float getRandomObstacleHeight(bool isTop)
+void updateObstacle(Obstacle obstacle[], const int maxObstacles)
 {
-	if (isTop)
+	for (int i = 0; i < maxObstacles; i++)
 	{
-		return static_cast<float>(0, getBirdDiameter());
+		checkObstacleLimits(obstacle, maxObstacles);
+		obstacle[i].rect.x -= obstacle[i].speed * GetFrameTime();
 	}
-	else
+}
+
+void drawObstacle(Obstacle obstacle[], const int maxObstacles)
+{
+	for (int i = 0; i < maxObstacles; i++)
 	{
-		return static_cast<float>(GetRandomValue(getBirdDiameter(), static_cast<int>(height)));
+		DrawRectangle(static_cast<int>(obstacle[i].rect.x), static_cast<int>(obstacle[i].rect.y), static_cast<int>(obstacle[i].rect.width), static_cast<int>(obstacle[i].rect.height), obstacle[i].color);
 	}
+}
+
+void restartObstacles(Obstacle obstacle[], const int maxObstacles)
+{
+	for (int i = 0; i < maxObstacles; i++)
+	{
+		obstacle[i].rect.x = static_cast<float>(width);
+
+		if (i % 2 == 0)
+		{
+			obstacle[i].rect.height = getRandomObstacleHeight();
+		}
+		else
+		{
+			obstacle[i].rect.y = obstacle[i - 1].rect.height + getBirdDiameter() + space;
+			obstacle[i].rect.height = height;
+		}
+	}
+}
+
+void checkObstacleLimits(Obstacle obstacle[], const int maxObstacles) // if the pipe is no longer on screen
+{
+	for (int i = 0; i < maxObstacles; i++)
+	{
+		if (obstacle[i].rect.x < 0)
+		{
+			restartObstacles(obstacle, maxObstacles);
+		}
+	}
+}
+
+float getRandomObstacleHeight()
+{
+	return static_cast<float>(GetRandomValue(getBirdDiameter(), height - getBirdDiameter() - space));
 }
 }
