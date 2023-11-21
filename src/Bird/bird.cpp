@@ -21,7 +21,9 @@ namespace game
 		bird.gravity = 600.f;
 		bird.velocity = 0.f;
 		bird.flying = false;
+		bird.score = 0;
 		bird.color = WHITE;
+		bird.died = false;
 		birdDiameter = static_cast<int>(bird.radius * 2);
 
 		initAnimation(birdAnimation, static_cast<float>(bird.texture.width), static_cast<float>(bird.texture.height), 2);
@@ -55,6 +57,8 @@ namespace game
 	void restartBird(Bird& bird)
 	{
 		bird.pos = { 120, 240 };
+		bird.score = 0;
+		bird.died = false;
 	}
 
 	void moveBirdUp(Bird& bird)
@@ -82,7 +86,7 @@ namespace game
 
 	bool checkBirdTouchGround(Bird& bird, int screenHeight)
 	{
-		return (bird.center.y > screenHeight);
+		return (bird.center.y - bird.radius > screenHeight);
 	}
 
 	int getBirdDiameter()

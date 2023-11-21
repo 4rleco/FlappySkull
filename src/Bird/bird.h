@@ -14,6 +14,8 @@ namespace game
 		float gravity;
 		float velocity;
 		bool flying;
+		int score;
+		bool died;
 		Color color;
 	};
 

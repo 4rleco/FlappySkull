@@ -4,6 +4,7 @@ namespace game
 {
 	CurrentScreen currentScreen = MENU;
 	static const int fontSize = 20;
+	static const int versionFontSize = 30;
 	static Color fontColor = RED;
 
 	void printVersion();
@@ -65,8 +66,8 @@ namespace game
 
 	void printVersion()
 	{
-		DrawText("v 0.2 ", width - MeasureText("v 0.2 ", fontSize),
-			height - static_cast<int>(MeasureTextEx(GetFontDefault(), "v 0.2 ", fontSize, 0).y), fontSize, fontColor);
+		DrawText("v 0.2 ", width - MeasureText("v 0.2 ", versionFontSize),
+			height - static_cast<int>(MeasureTextEx(GetFontDefault(), "v 0.2 ", versionFontSize, 0).y), versionFontSize, fontColor);
 	}
 
 	void drawButton(Button button)
