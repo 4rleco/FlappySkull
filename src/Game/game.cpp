@@ -82,7 +82,7 @@ namespace game
 
 	void singlePlayer()
 	{
-		if (!bird1.died || !bird2.died)
+		if (!bird1.died)
 		{
 			updateParallax();
 			updateBackButton(backButton);

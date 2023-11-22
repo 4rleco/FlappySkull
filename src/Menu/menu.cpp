@@ -72,7 +72,7 @@ namespace game
 
 	void printVersion()
 	{
-		DrawText("v 0.2 ", width - MeasureText("v 0.2 ", versionFontSize),
+		DrawText("v 0.3 ", width - MeasureText("v 0.2 ", versionFontSize),
 			height - static_cast<int>(MeasureTextEx(GetFontDefault(), "v 0.2 ", versionFontSize, 0).y), versionFontSize, fontColor);
 	}
 
