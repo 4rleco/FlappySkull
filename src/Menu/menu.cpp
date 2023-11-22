@@ -12,7 +12,7 @@ namespace game
 	bool isMouseOverButton(Button button);
 	bool isButtonClicked(Button& button);
 
-	void initButtons(Button& playButton, Button& creditsButton, Button& exitButton, Button& backButton)
+	void initButtons(Button& onePlayerButton, Button& twoPlayerButton, Button& creditsButton, Button& exitButton, Button& backButton)
 	{
 		float buttonWidth = 200.f;
 		float buttonHeight = 40.f;
@@ -20,25 +20,30 @@ namespace game
 		int firstButtonOffsetY = -50;
 		int secondButtonOffsetY = 10;
 		int thirdButtonOffsetY = 70;
+		int fourthButtonOffsetY = 130;
 
-		playButton = { {static_cast<float>(width) / 2 - offsetX, static_cast<float>(height) / 2 + firstButtonOffsetY,
-						buttonWidth, buttonHeight}, "Play", false };
+		onePlayerButton = { {static_cast<float>(width) / 2 - offsetX, static_cast<float>(height) / 2 + firstButtonOffsetY,
+						buttonWidth, buttonHeight}, "SinglePlayer", false };
 
-		creditsButton = { {static_cast<float>(width) / 2 - offsetX,  static_cast<float>(height) / 2 + secondButtonOffsetY,
+		twoPlayerButton = { {static_cast<float>(width) / 2 - offsetX, static_cast<float>(height) / 2 + secondButtonOffsetY,
+						buttonWidth, buttonHeight}, "MultiPlayer", false };
+
+		creditsButton = { {static_cast<float>(width) / 2 - offsetX,  static_cast<float>(height) / 2 + thirdButtonOffsetY,
 						   buttonWidth, buttonHeight}, "Credits", false };
 
-		exitButton = { {static_cast<float>(width) / 2 - offsetX,  static_cast<float>(height) / 2 + thirdButtonOffsetY,
+		exitButton = { {static_cast<float>(width) / 2 - offsetX,  static_cast<float>(height) / 2 + fourthButtonOffsetY,
 						buttonWidth, buttonHeight}, "Exit", false };
 
 		backButton = { { 980, 720, 40, 40 }, "<-", false };
 	}
 
-	void drawButtons(Button playButton, Button creditsButton, Button exitButton)
+	void drawButtons(Button onePlayerButton, Button twoPlayerButton, Button creditsButton, Button exitButton)
 	{
 		BeginDrawing();
 		ClearBackground(GRAY);
 
-		drawButton(playButton);
+		drawButton(onePlayerButton);
+		drawButton(twoPlayerButton);
 		drawButton(creditsButton);
 		drawButton(exitButton);
 

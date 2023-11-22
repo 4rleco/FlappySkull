@@ -18,7 +18,8 @@ namespace game
 	static Bird bird1;
 	static Bird bird2;
 	static Obstacle obstacle[maxObstacles];
-	static Button playButton;
+	static Button onePlayerButton;
+	static Button twoPlayerButton;
 	static Button creditsButton;
 	static Button exitButton;
 	Button backButton;
@@ -29,14 +30,15 @@ namespace game
 	void initGame();
 	void singlePlayer();
 	void multiPlayer();
-	void drawGame();
+	void drawSinglePlayerGame();
+	void drawMultiPlayerame();
 	void deinitGame();
 
 	void gameLoop()
 	{
 		initGame();
 
-		initButtons(playButton, creditsButton, exitButton, backButton);
+		initButtons(onePlayerButton, twoPlayerButton, creditsButton, exitButton, backButton);
 
 		while (!WindowShouldClose())
 		{
@@ -45,12 +47,16 @@ namespace game
 			switch (currentScreen)
 			{
 			case MENU:
-				updateMenu(playButton, creditsButton, exitButton);
-				drawButtons(playButton, creditsButton, exitButton);
+				updateMenu(onePlayerButton, twoPlayerButton, creditsButton, exitButton);
+				drawButtons(onePlayerButton, twoPlayerButton, creditsButton, exitButton);
 				break;
-			case PLAY:
-				updateGame();
-				drawGame();
+			case SINGLEPLAYER:
+				singlePlayer();
+				drawSinglePlayerGame();
+				break;
+			case MULTIPLAYER:
+				multiPlayer();
+				drawMultiPlayerame();
 				break;
 			case CREDITS:
 				printCredits();
@@ -91,7 +97,7 @@ namespace game
 				}
 
 				if (CheckCollisionCircleRec(bird1.center, bird1.radius, obstacle[i].rect) ||
-					checkBirdTouchGround(bird1, height))					
+					checkBirdTouchGround(bird1, height))
 				{
 					bird1.died = true;
 				}
@@ -116,7 +122,7 @@ namespace game
 					bird1.score += 10;
 				}
 
-				if (CheckCollisionCircleRec(bird1.center, bird1.radius, obstacle[i].rect) || 
+				if (CheckCollisionCircleRec(bird1.center, bird1.radius, obstacle[i].rect) ||
 					checkBirdTouchGround(bird1, height) ||
 					CheckCollisionCircleRec(bird2.center, bird1.radius, obstacle[i].rect) ||
 					checkBirdTouchGround(bird2, height))
@@ -128,7 +134,43 @@ namespace game
 		}
 	}
 
-	void drawGame()
+	void drawSinglePlayerGame()
+	{
+		BeginDrawing();
+		ClearBackground(RAYWHITE);
+
+		drawParallax();
+
+		drawBird(bird1);
+		drawObstacle(obstacle, maxObstacles);
+
+		if (!bird1.died)
+		{
+			DrawText(TextFormat("%i", bird1.score), 10, 5, 30, BLACK);
+		}
+
+		if (bird1.died)
+		{
+			DrawText("Game Over", GetScreenWidth() / 2 - 120, GetScreenHeight() / 2 - 80, 60, BLACK);
+			DrawText("Score:", GetScreenWidth() / 2 - 30, GetScreenHeight() / 2, 30, BLACK);
+			DrawText(TextFormat("%i", bird1.score), GetScreenWidth() / 2 + 80, GetScreenHeight() / 2, 30, BLACK);
+			DrawText("Press \"Enter\" to restart game", GetScreenWidth() / 2 - 180, GetScreenHeight() / 2 + 60, 30, BLACK);
+
+			if (IsKeyPressed(KEY_ENTER))
+			{
+				restartParallax();
+				restartBird(bird1);
+				initObstacle(obstacle, maxObstacles);
+			}
+		}
+
+		drawBackButton(backButton);
+
+		EndDrawing();
+
+	}
+
+	void drawMultiPlayerame()
 	{
 		BeginDrawing();
 		ClearBackground(RAYWHITE);

@@ -18,9 +18,9 @@ namespace game
 		bool clicked;
 	};
 
-	void initButtons(Button& playButton, Button& creditsButton, Button& exitButton, Button& backButton);
-	void drawButtons(Button playButton, Button creditsButton, Button exitButton);
+	void initButtons(Button& onePlayerButton, Button& twoPlayerButton, Button& creditsButton, Button& exitButton, Button& backButton);
+	void drawButtons(Button onePlayerButton, Button twoPlayerButton, Button creditsButton, Button exitButton);
 	void drawBackButton(Button backButton);
-	void updateMenu(Button& playButton, Button& creditsButton, Button& exitButton);
+	void updateMenu(Button& onePlayerButton, Button& twoPlayerButton, Button& creditsButton, Button& exitButton);
 	void updateBackButton(Button backButton);
 }
