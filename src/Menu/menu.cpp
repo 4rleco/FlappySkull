@@ -52,9 +52,10 @@ namespace game
 		if (currentScreen != MENU) drawButton(backButton);
 	}
 
-	void updateMenu(Button& playButton, Button& creditsButton, Button& exitButton)
+	void updateMenu(Button& onePlayerButton, Button& twoPlayerButton, Button& creditsButton, Button& exitButton)
 	{
-		if (isButtonClicked(playButton)) currentScreen = PLAY;
+		if (isButtonClicked(onePlayerButton)) currentScreen = SINGLEPLAYER;
+		if (isButtonClicked(twoPlayerButton)) currentScreen = MULTIPLAYER;
 		if (isButtonClicked(creditsButton)) currentScreen = CREDITS;
 		if (isButtonClicked(exitButton)) currentScreen = EXIT;
 	}

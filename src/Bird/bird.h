@@ -15,11 +15,12 @@ namespace game
 		float velocity;
 		bool flying;
 		int score;
+		int keyUp;
 		bool died;
 		Color color;
 	};
 
-	void initBird(Bird& bird);
+	void initBird(Bird& bird, int keyUp, float posX, float posY);
 	void updateBird(Bird& bird);
 	void drawBird(Bird bird);
 	void restartBird(Bird& bird);

@@ -12,16 +12,17 @@ namespace game
 	void checkBirdHeightLimit(Bird& bird);
 	void updateBirdPos(Bird& bird);
 
-	void initBird(Bird& bird)
+	void initBird(Bird& bird, int keyUp, float posX, float posY)
 	{
 		bird.texture = LoadTexture("res/tempSpritesheet.png");
-		bird.pos = { 120, 240 };
+		bird.pos = { posX, posY };
 		bird.jumpForce = 250.f;
 		bird.radius = 40.f;
 		bird.gravity = 600.f;
 		bird.velocity = 0.f;
 		bird.flying = false;
 		bird.score = 0;
+		bird.keyUp = keyUp;
 		bird.color = WHITE;
 		bird.died = false;
 		birdDiameter = static_cast<int>(bird.radius * 2);
@@ -63,7 +64,7 @@ namespace game
 
 	void moveBirdUp(Bird& bird)
 	{
-		if (IsKeyPressed(KEY_W))
+		if (IsKeyPressed(bird.keyUp))
 		{
 			bird.velocity = -bird.jumpForce;
 			bird.flying = true;

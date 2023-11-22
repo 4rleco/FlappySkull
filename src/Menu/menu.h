@@ -7,7 +7,7 @@
 
 namespace game
 {
-	enum CurrentScreen { MENU, PLAY, PAUSE, CREDITS, EXIT };
+	enum CurrentScreen { MENU, SINGLEPLAYER, MULTIPLAYER, PAUSE, CREDITS, EXIT };
 	extern const int width;
 	extern const int height;
 
