@@ -16,7 +16,11 @@ namespace game
 	extern CurrentScreen currentScreen;
 	const int maxObstacles = 6;
 	static Bird bird1;
+	float bird1PosX = 120.0f;
+	float bird1PosY = 240.0f;
 	static Bird bird2;
+	float bird2PosX = 40.0f;
+	float bird2PosY = 240.0f;
 	static Obstacle obstacle[maxObstacles];
 	static Button onePlayerButton;
 	static Button twoPlayerButton;
@@ -48,6 +52,8 @@ namespace game
 			{
 			case MENU:
 				updateMenu(onePlayerButton, twoPlayerButton, creditsButton, exitButton);
+				restartBird(bird1, bird1PosX, bird1PosY);
+				restartBird(bird2, bird2PosX, bird2PosY);
 				drawButtons(onePlayerButton, twoPlayerButton, creditsButton, exitButton);
 				break;
 			case SINGLEPLAYER:
@@ -76,7 +82,7 @@ namespace game
 
 		initParallax();
 		initBird(bird1, KeyboardKey::KEY_W, 120.0f, 240.0f);
-		initBird(bird2, KeyboardKey::KEY_UP, 90.0f, 240.0f);
+		initBird(bird2, KeyboardKey::KEY_UP, 40.0f, 240.0f);
 		initObstacle(obstacle, maxObstacles);
 	}
 
@@ -91,9 +97,21 @@ namespace game
 
 			for (int i = 0; i < maxObstacles; i++)
 			{
-				if (bird1.pos.x > obstacle[i].rect.x)
+				if (bird1.pos.x > obstacle[i].rect.x + obstacle[i].rect.width)
 				{
-					bird1.score += 10;
+					bird1.gainScore = true;
+				}
+
+				if (bird1.gainScore)
+				{
+					if (i % 2 == 0)
+					{
+						bird1.score += obstacle[i].givePoints;
+
+						obstacle[i].givePoints = 0;
+					}
+
+					bird1.gainScore = false;
 				}
 
 				if (CheckCollisionCircleRec(bird1.center, bird1.radius, obstacle[i].rect) ||
@@ -117,9 +135,22 @@ namespace game
 
 			for (int i = 0; i < maxObstacles; i++)
 			{
-				if (bird1.pos.x > obstacle[i].rect.x || bird2.pos.x > obstacle[i].rect.x)
+				if (bird1.pos.x > obstacle[i].rect.x && bird2.pos.x > obstacle[i].rect.x)
 				{
-					bird1.score += 10;
+					bird1.gainScore = true;
+					bird2.gainScore = true;
+				}
+
+				if (bird1.gainScore && bird2.gainScore)
+				{
+					if (i % 2 == 0)
+					{
+						bird1.score += obstacle[i].givePoints;
+
+						obstacle[i].givePoints = 0;
+					}
+
+					bird1.gainScore = false;
 				}
 
 				if (CheckCollisionCircleRec(bird1.center, bird1.radius, obstacle[i].rect) ||
@@ -159,7 +190,7 @@ namespace game
 			if (IsKeyPressed(KEY_ENTER))
 			{
 				restartParallax();
-				restartBird(bird1);
+				restartBird(bird1, bird1PosX, bird1PosY);
 				initObstacle(obstacle, maxObstacles);
 			}
 		}
@@ -196,8 +227,8 @@ namespace game
 			if (IsKeyPressed(KEY_ENTER))
 			{
 				restartParallax();
-				restartBird(bird1);
-				restartBird(bird2);
+				restartBird(bird1, bird1PosX, bird1PosY);
+				restartBird(bird2, bird2PosX, bird2PosY);
 				initObstacle(obstacle, maxObstacles);
 			}
 		}

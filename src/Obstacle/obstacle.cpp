@@ -24,14 +24,21 @@ namespace game
 		{
 			obstacle[i].rect.width = 50;
 			obstacle[i].speed = 85.0f;
+			obstacle[i].givePoints = 10;
 			obstacle[i].color = RED;
 
 			if (i % 2 == 0)
 			{
 				obstacle[i].rect.x = static_cast<float>(width) + i * obstacle[i].rect.width * spaceBetweenObstacles;
 				obstacle[i].rect.y = 0;
-				obstacle[i].rect.height = getRandomObstacleHeight();
+
+				do
+				{
+					obstacle[i].rect.height = getRandomObstacleHeight();
+
+				} while (getRandomObstacleHeight() == obstacle[i].rect.height);
 			}
+
 			else
 			{
 				obstacle[i].rect.x = obstacle[i - 1].rect.x;
@@ -66,9 +73,14 @@ namespace game
 
 		if (obstacleNumber % 2 == 0) // the pair numbers from the array will be the upper pipes
 		{
-			obstacle.rect.x = static_cast<float>(width) + obstacleNumber * prevoiusObstacleWidth * spaceBetweenObstacles;
-			obstacle.rect.height = getRandomObstacleHeight();
+			obstacle.rect.x = static_cast<float>(width) + obstacleNumber * prevoiusObstacleWidth * (spaceBetweenObstacles * 2);
+			do
+			{
+				obstacle.rect.height = getRandomObstacleHeight();
+
+			} while (getRandomObstacleHeight() == previiousObstacleHeight);
 		}
+
 		else
 		{
 			obstacle.rect.x = static_cast<float>(previousObstacleX);
@@ -84,7 +96,13 @@ namespace game
 		{
 			if (obstacle[i].rect.x + obstacle[i].rect.width < 0)
 			{
+				if (i == 0)
+				{
+					obstacle[i - 1] = obstacle[4];
+				}
+
 				restartObstacle(obstacle[i], i, static_cast<int>(obstacle[i - 1].rect.width), static_cast<int>(obstacle[i - 1].rect.height), static_cast<int>(obstacle[i - 1].rect.x));
+				
 				std::cout << i << std::endl;
 			}
 		}

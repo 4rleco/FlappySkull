@@ -25,6 +25,7 @@ namespace game
 		bird.keyUp = keyUp;
 		bird.color = WHITE;
 		bird.died = false;
+		bird.gainScore = false;
 		birdDiameter = static_cast<int>(bird.radius * 2);
 
 		initAnimation(birdAnimation, static_cast<float>(bird.texture.width), static_cast<float>(bird.texture.height), 2);
@@ -55,9 +56,10 @@ namespace game
 #endif
 	}
 
-	void restartBird(Bird& bird)
+	void restartBird(Bird& bird, float posX, float posY)
 	{
-		bird.pos = { 120, 240 };
+		bird.pos = { posX, posY };
+		bird.velocity = 0;
 		bird.score = 0;
 		bird.died = false;
 	}
