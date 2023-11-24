@@ -12,19 +12,25 @@ namespace game
 	void checkObstacleLimits(Obstacle& obstacle);
 	float getRandomObstacleHeight();
 
-	void initObstacle(Bird bird, Obstacle& obstacle)
+	void initObstacle(Obstacle& obstacle, int spaceBetweenObstacles)
 	{
 		initPipe(obstacle.pipeUp);
 		initPipe(obstacle.pipeDown);
 
+		obstacle.pipeUp.rect.x = static_cast<float>(width) + spaceBetweenObstacles;
+
+		obstacle.pipeDown.rect.x = static_cast<float>(width) + spaceBetweenObstacles;
+
 		obstacle.pipeUp.rect.height = getRandomObstacleHeight();
-		
+
 		if (obstacle.pipeUp.rect.height <= 0)
 		{
 			obstacle.pipeUp.rect.height = 0;
 		}
 
-		obstacle.pipeDown.rect.y += obstacle.pipeUp.rect.height + bird.radius + getBirdDiameter() + space;
+		obstacle.pipeDown.rect.y += obstacle.pipeUp.rect.height + getBirdDiameter() + space;
+
+		obstacle.pipeDown.rect.height = static_cast<float>(height);
 
 		obstacle.speed = 85.0f;
 

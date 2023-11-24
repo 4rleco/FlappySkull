@@ -16,7 +16,7 @@ namespace game
 		bool ofScreen;
 	};
 
-	void initObstacle(Bird bird, Obstacle& obstacle);
+	void initObstacle(Obstacle& obstacle, int spaceBetweenObstacles);
 	void updateObstacle(Obstacle& obstacle);
 	
 }

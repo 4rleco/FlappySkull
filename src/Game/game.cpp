@@ -55,6 +55,7 @@ namespace game
 				updateMenu(onePlayerButton, twoPlayerButton, creditsButton, exitButton);
 				restartBird(bird1, bird1PosX, bird1PosY);
 				restartBird(bird2, bird2PosX, bird2PosY);
+				initObstacles(obstacleManager);
 				drawButtons(onePlayerButton, twoPlayerButton, creditsButton, exitButton);
 				break;
 			case SINGLEPLAYER:
@@ -86,7 +87,7 @@ namespace game
 		initParallax();
 		initBird(bird1, KeyboardKey::KEY_W, 120.0f, 240.0f);
 		initBird(bird2, KeyboardKey::KEY_UP, 40.0f, 240.0f);
-		initObstacles(bird1, obstacleManager);
+		initObstacles(obstacleManager);
 	}
 
 	void singlePlayer()
@@ -201,7 +202,7 @@ namespace game
 			{
 				restartParallax();
 				restartBird(bird1, bird1PosX, bird1PosY);
-				initObstacles(bird1, obstacleManager);
+				initObstacles(obstacleManager);
 			}
 		}
 
@@ -239,7 +240,7 @@ namespace game
 				restartParallax();
 				restartBird(bird1, bird1PosX, bird1PosY);
 				restartBird(bird2, bird2PosX, bird2PosY);
-				initObstacles(bird1, obstacleManager);
+				initObstacles(obstacleManager);
 			}
 		}
 

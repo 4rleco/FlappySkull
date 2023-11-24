@@ -4,21 +4,25 @@
 
 namespace game
 {
-	void initObstacles(Bird bird, ObstacleManager& obstacleManager)
+	void initObstacles(ObstacleManager& obstacleManager)
 	{
+		obstacleManager.spaceBetweenObstacles = 10;
+
 		for (int i = 0; i < maxObstacles; i++)
 		{
-			initObstacle(bird, obstacleManager.obstacles[i]);
+			obstacleManager.spaceBetweenObstacles += i * i-1;
+
+			initObstacle(obstacleManager.obstacles[i], obstacleManager.spaceBetweenObstacles);
 		}
 	}
 
-	void restartObstacles(Bird bird, ObstacleManager& obstacleManager)
+	void restartObstacles(ObstacleManager& obstacleManager)
 	{
 		for (int i = 0; i < maxObstacles; i++)
 		{
 			if (obstacleManager.obstacles[i].ofScreen)
 			{
-				initObstacle(bird, obstacleManager.obstacles[i]);
+				initObstacle(obstacleManager.obstacles[i], obstacleManager.spaceBetweenObstacles);
 			}
 		}
 	}

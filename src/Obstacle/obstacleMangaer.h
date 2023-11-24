@@ -9,9 +9,11 @@ namespace game
 	struct ObstacleManager
 	{
 		Obstacle obstacles[maxObstacles];
+
+		int spaceBetweenObstacles;
 	};
 
-	void initObstacles(Bird bird, ObstacleManager& obstacleManager);
-	void restartObstacles(Bird bird, ObstacleManager& obstacleManager);
+	void initObstacles(ObstacleManager& obstacleManager);
+	void restartObstacles(ObstacleManager& obstacleManager);
 	void drawObstacles(ObstacleManager obstacleManager);
 }
