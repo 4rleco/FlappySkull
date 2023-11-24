@@ -73,7 +73,7 @@ namespace game
 
 		if (obstacleNumber % 2 == 0) // the pair numbers from the array will be the upper pipes
 		{
-			obstacle.rect.x = static_cast<float>(width) + obstacleNumber * prevoiusObstacleWidth * (spaceBetweenObstacles * 2);
+			obstacle.rect.x = static_cast<float>(width) + obstacleNumber * prevoiusObstacleWidth * spaceBetweenObstacles * 2;
 			do
 			{
 				obstacle.rect.height = getRandomObstacleHeight();
@@ -87,7 +87,7 @@ namespace game
 			obstacle.rect.y = static_cast<float>(previiousObstacleHeight + getBirdDiameter() + space);
 			obstacle.rect.height = static_cast<float>(height);
 		}
-
+		obstacle.givePoints = 10;
 	}
 
 	void checkObstacleLimits(Obstacle obstacle[], const int maxObstacles) // if the pipe is no longer on screen

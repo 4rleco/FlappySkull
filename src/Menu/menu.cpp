@@ -4,9 +4,12 @@ namespace game
 {
 	CurrentScreen currentScreen = MENU;
 	static const int fontSize = 20;
+	static const int titleFontSize = 60;
 	static const int versionFontSize = 30;
 	static Color fontColor = RED;
+	static Color titleColor = RED;
 
+	void printTitle();
 	void printVersion();
 	void drawButton(Button button);
 	bool isMouseOverButton(Button button);
@@ -42,6 +45,8 @@ namespace game
 		BeginDrawing();
 		ClearBackground(GRAY);
 
+		printTitle();
+
 		drawButton(onePlayerButton);
 		drawButton(twoPlayerButton);
 		drawButton(creditsButton);
@@ -70,10 +75,17 @@ namespace game
 		if (isButtonClicked(backButton) && currentScreen != MENU) currentScreen = MENU;
 	}
 
+	void printTitle()
+	{
+		DrawText("Flappy Skull", width - MeasureText("Flappy Skull", titleFontSize) * 2,
+			height / 2 - (titleFontSize * 3), titleFontSize, titleColor);
+
+	}
+
 	void printVersion()
 	{
-		DrawText("v 0.3 ", width - MeasureText("v 0.2 ", versionFontSize),
-			height - static_cast<int>(MeasureTextEx(GetFontDefault(), "v 0.2 ", versionFontSize, 0).y), versionFontSize, fontColor);
+		DrawText("v 0.3 ", width - MeasureText("v 0.3 ", versionFontSize),
+			height - static_cast<int>(MeasureTextEx(GetFontDefault(), "v 0.3 ", versionFontSize, 0).y), versionFontSize, fontColor);
 	}
 
 	void drawButton(Button button)
