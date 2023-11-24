@@ -7,6 +7,7 @@
 
 #include "Bird/bird.h"
 
+#include "Obstacle/pipe.h"         
 #include "Obstacle/obstacle.h"
 
 #include "raylib.h"
@@ -14,14 +15,16 @@
 namespace game
 {
 	extern CurrentScreen currentScreen;
-	const int maxObstacles = 6;
+	const int maxObstacles = 4;
 	static Bird bird1;
+	static Pipe pipeUp;
+	static Pipe pipeDown;
 	float bird1PosX = 120.0f;
 	float bird1PosY = 240.0f;
 	static Bird bird2;
 	float bird2PosX = 40.0f;
 	float bird2PosY = 240.0f;
-	static Obstacle obstacle[maxObstacles];
+	static Obstacle obstacle;
 	static Button onePlayerButton;
 	static Button twoPlayerButton;
 	static Button creditsButton;
@@ -54,6 +57,7 @@ namespace game
 				updateMenu(onePlayerButton, twoPlayerButton, creditsButton, exitButton);
 				restartBird(bird1, bird1PosX, bird1PosY);
 				restartBird(bird2, bird2PosX, bird2PosY);
+				
 				drawButtons(onePlayerButton, twoPlayerButton, creditsButton, exitButton);
 				break;
 			case SINGLEPLAYER:
@@ -78,12 +82,14 @@ namespace game
 
 	void initGame()
 	{
+		SetRandomSeed(static_cast<unsigned int>(time(NULL)));
+
 		InitWindow(width, height, "Flappy Bird");
 
 		initParallax();
 		initBird(bird1, KeyboardKey::KEY_W, 120.0f, 240.0f);
 		initBird(bird2, KeyboardKey::KEY_UP, 40.0f, 240.0f);
-		initObstacle(obstacle, maxObstacles);
+		initObstacle(bird1, obstacle);
 	}
 
 	void singlePlayer()
@@ -93,9 +99,9 @@ namespace game
 			updateParallax();
 			updateBackButton(backButton);
 			updateBird(bird1);
-			updateObstacle(obstacle, maxObstacles);
+			updateObstacle(obstacle);
 
-			for (int i = 0; i < maxObstacles; i++)
+			/*for (int i = 0; i < maxObstacles; i++)
 			{
 				if (bird1.pos.x > obstacle[i].rect.x + obstacle[i].rect.width)
 				{
@@ -119,7 +125,7 @@ namespace game
 				{
 					bird1.died = true;
 				}
-			}
+			}*/
 		}
 	}
 
@@ -131,9 +137,9 @@ namespace game
 			updateBackButton(backButton);
 			updateBird(bird1);
 			updateBird(bird2);
-			updateObstacle(obstacle, maxObstacles);
+			updateObstacle(obstacle);
 
-			for (int i = 0; i < maxObstacles; i++)
+			/*for (int i = 0; i < maxObstacles; i++)
 			{
 				if (bird1.pos.x > obstacle[i].rect.x && bird2.pos.x > obstacle[i].rect.x)
 				{
@@ -161,7 +167,7 @@ namespace game
 					bird1.died = true;
 					bird2.died = true;
 				}
-			}
+			}*/
 		}
 	}
 
@@ -173,7 +179,7 @@ namespace game
 		drawParallax();
 
 		drawBird(bird1);
-		drawObstacle(obstacle, maxObstacles);
+		drawObstacle(obstacle);
 
 		if (!bird1.died)
 		{
@@ -191,7 +197,7 @@ namespace game
 			{
 				restartParallax();
 				restartBird(bird1, bird1PosX, bird1PosY);
-				initObstacle(obstacle, maxObstacles);
+				initObstacle(bird1, obstacle);
 			}
 		}
 
@@ -210,7 +216,7 @@ namespace game
 
 		drawBird(bird1);
 		drawBird(bird2);
-		drawObstacle(obstacle, maxObstacles);
+		drawObstacle(obstacle);
 
 		if (!bird1.died || !bird2.died)
 		{
@@ -229,7 +235,7 @@ namespace game
 				restartParallax();
 				restartBird(bird1, bird1PosX, bird1PosY);
 				restartBird(bird2, bird2PosX, bird2PosY);
-				initObstacle(obstacle, maxObstacles);
+				initObstacle(bird1, obstacle);
 			}
 		}
 

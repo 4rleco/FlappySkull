@@ -26,6 +26,7 @@
     <ClCompile Include="src\Menu\credits.cpp" />
     <ClCompile Include="src\Menu\menu.cpp" />
     <ClCompile Include="src\Obstacle\obstacle.cpp" />
+    <ClCompile Include="src\Obstacle\pipe.cpp" />
     <ClCompile Include="src\Parallax\parallax.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +36,7 @@
     <ClInclude Include="src\Menu\credits.h" />
     <ClInclude Include="src\Menu\menu.h" />
     <ClInclude Include="src\Obstacle\obstacle.h" />
+    <ClInclude Include="src\Obstacle\pipe.h" />
     <ClInclude Include="src\Parallax\parallax.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

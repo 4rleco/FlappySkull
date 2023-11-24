@@ -1,7 +1,5 @@
 #include "obstacle.h"
 
-#include "Bird/bird.h"
-
 #include <time.h>
 #include <iostream>
 
@@ -12,15 +10,24 @@ namespace game
 	static int space = 90;
 	static int spaceBetweenObstacles = 3;
 
-	void restartObstacle(Obstacle& obstacle, int obstacleNumber, int prevoiusObstacleWidth, int previiousObstacleHeight, int previousObstacleX);
-	void checkObstacleLimits(Obstacle obstacle[], const int maxObstacles);
+	void checkObstacleLimits(Obstacle obstacle);
 	float getRandomObstacleHeight();
 
-	void initObstacle(Obstacle obstacle[], const int maxObstacles)
+	void initObstacle(Bird bird, Obstacle& obstacle)
 	{
-		SetRandomSeed(static_cast<unsigned int>(time(NULL)));
+		InitPipe(obstacle.pipeUp);
+		InitPipe(obstacle.pipeDown);
 
-		for (int i = 0; i < maxObstacles; i++)
+		obstacle.pipeUp.rect.height = getRandomObstacleHeight();
+		obstacle.pipeDown.rect.y = obstacle.pipeUp.rect.height + (bird.radius * 4);
+
+		obstacle.speed = 85.0f;
+
+		obstacle.givePoints = 10;
+
+		obstacle.ofScreen = false;
+
+		/*for (int i = 0; i < maxObstacles; i++)
 		{
 			obstacle[i].rect.width = 50;
 			obstacle[i].speed = 85.0f;
@@ -45,54 +52,42 @@ namespace game
 				obstacle[i].rect.y = obstacle[i - 1].rect.height + getBirdDiameter() + space;
 				obstacle[i].rect.height = static_cast<float>(height);
 			}
-		}
+		}*/
 	}
 
-	void updateObstacle(Obstacle obstacle[], const int maxObstacles)
+	void updateObstacle(Obstacle& obstacle)
 	{
-		for (int i = 0; i < maxObstacles; i++)
+		obstacle.pipeUp.rect.x -= obstacle.speed * GetFrameTime();
+		obstacle.pipeDown.rect.x -= obstacle.speed * GetFrameTime();
+
+		checkObstacleLimits(obstacle);
+
+		/*for (int i = 0; i < maxObstacles; i++)
 		{
 			obstacle[i].rect.x -= obstacle[i].speed * GetFrameTime();
 			checkObstacleLimits(obstacle, maxObstacles);
-		}
+		}*/
 	}
 
-	void drawObstacle(Obstacle obstacle[], const int maxObstacles)
+	void drawObstacle(Obstacle obstacle)
 	{
-		for (int i = 0; i < maxObstacles; i++)
+		DrawRectangle(static_cast<int>(obstacle.pipeUp.rect.x), static_cast<int>(obstacle.pipeUp.rect.y), static_cast<int>(obstacle.pipeUp.rect.width), static_cast<int>(obstacle.pipeUp.rect.height), obstacle.pipeUp.color);
+		DrawRectangle(static_cast<int>(obstacle.pipeDown.rect.x), static_cast<int>(obstacle.pipeDown.rect.y), static_cast<int>(obstacle.pipeDown.rect.width), static_cast<int>(obstacle.pipeDown.rect.height), obstacle.pipeDown.color);
+		/*for (int i = 0; i < maxObstacles; i++)
 		{
 			DrawRectangle(static_cast<int>(obstacle[i].rect.x), static_cast<int>(obstacle[i].rect.y), static_cast<int>(obstacle[i].rect.width), static_cast<int>(obstacle[i].rect.height), obstacle[i].color);
-		}
+		}*/
 	}
 
-	void restartObstacle(Obstacle& obstacle, int obstacleNumber, int prevoiusObstacleWidth, int previiousObstacleHeight, int previousObstacleX)
+	void checkObstacleLimits(Obstacle obstacle) // if the pipe is no longer on screen
 	{
-
-		//obstacle[i].rect.x = static_cast<float>(width);
-		/*	obstacle.rect.x = static_cast<float>(width) + i + 20*/;
-
-		if (obstacleNumber % 2 == 0) // the pair numbers from the array will be the upper pipes
+		if (obstacle.pipeUp.rect.x + obstacle.pipeUp.rect.width <= 0 &&
+			obstacle.pipeDown.rect.x + obstacle.pipeDown.rect.width <= 0)
 		{
-			obstacle.rect.x = static_cast<float>(width) + obstacleNumber * prevoiusObstacleWidth * spaceBetweenObstacles * 2;
-			do
-			{
-				obstacle.rect.height = getRandomObstacleHeight();
-
-			} while (getRandomObstacleHeight() == previiousObstacleHeight);
+			obstacle.ofScreen = true;
 		}
 
-		else
-		{
-			obstacle.rect.x = static_cast<float>(previousObstacleX);
-			obstacle.rect.y = static_cast<float>(previiousObstacleHeight + getBirdDiameter() + space);
-			obstacle.rect.height = static_cast<float>(height);
-		}
-		obstacle.givePoints = 10;
-	}
-
-	void checkObstacleLimits(Obstacle obstacle[], const int maxObstacles) // if the pipe is no longer on screen
-	{
-		for (int i = 0; i < maxObstacles; i++)
+		/*for (int i = 0; i < maxObstacles; i++)
 		{
 			if (obstacle[i].rect.x + obstacle[i].rect.width < 0)
 			{
@@ -102,10 +97,10 @@ namespace game
 				}
 
 				restartObstacle(obstacle[i], i, static_cast<int>(obstacle[i - 1].rect.width), static_cast<int>(obstacle[i - 1].rect.height), static_cast<int>(obstacle[i - 1].rect.x));
-				
+
 				std::cout << i << std::endl;
 			}
-		}
+		}*/
 	}
 
 	float getRandomObstacleHeight()

@@ -1,18 +1,22 @@
 #pragma once
 
+#include "pipe.h"
+#include "Bird/bird.h"
+
 #include "raylib.h"
 
 namespace game
 {
 	struct Obstacle
 	{
-		Rectangle rect;
+		Pipe pipeUp;
+		Pipe pipeDown;
 		float speed;
 		int givePoints;
-		Color color;
+		bool ofScreen;
 	};
 
-	void initObstacle(Obstacle obstacle[], const int maxObstacles);
-	void updateObstacle(Obstacle obstacle[], const int maxObstacles);
-	void drawObstacle(Obstacle obstacle[], const int maxObstacles);
+	void initObstacle(Bird bird, Obstacle& obstacle);
+	void updateObstacle(Obstacle& obstacle);
+	void drawObstacle(Obstacle obstacle);
 }
