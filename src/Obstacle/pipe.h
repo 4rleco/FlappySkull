@@ -11,5 +11,5 @@ namespace game
 		Color color;
 	};
 
-	void InitPipe(Pipe& pipe);
+	void initPipe(Pipe& pipe);
 }

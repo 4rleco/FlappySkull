@@ -2,7 +2,7 @@
 
 namespace game
 {
-	void InitPipe(Pipe& pipe)
+	void initPipe(Pipe& pipe)
 	{
 		pipe.rect.x = static_cast<float>(GetScreenWidth());
 		pipe.rect.y = 0;

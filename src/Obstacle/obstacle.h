@@ -18,5 +18,5 @@ namespace game
 
 	void initObstacle(Bird bird, Obstacle& obstacle);
 	void updateObstacle(Obstacle& obstacle);
-	void drawObstacle(Obstacle obstacle);
+	
 }
